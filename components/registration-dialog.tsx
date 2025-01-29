@@ -144,36 +144,92 @@ export function RegistrationDialog({
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-
+  
     if (visaRequestNumber.length !== 6) {
       toast.error("❌ Invalid registration number", {
         description: "Please enter a valid 6-digit registration number.",
       });
       return;
     }
-
+  
     setIsSubmitting(true);
-
+  
     try {
       const response = await fetch(
         `/api/registrations?registrationNumber=${visaRequestNumber}`
       );
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Unable to fetch registration.");
       }
-
+  
       const data = await response.json();
       setRegistrationData(data);
-
-      toast.success("🎉 Registration found!", {
-        description: `You are registered for the session: ${data.session}.`,
-      });
+  
+      // Enhanced success message with visa support information
+      toast.success(
+        <div className="space-y-2">
+          <p className="font-semibold">🎉 Registration Verified!</p>
+          <p>You are registered for: {data.session}</p>
+          <div className="mt-2 text-sm">
+            <p>✉️ Our program coordinator has been notified of your visa support request.</p>
+            <p>📋 You will receive the visa support documents within 2 business days.</p>
+          </div>
+        </div>,
+        {
+          duration: 6000,
+          style: {
+            backgroundColor: "#f0fdf4",
+            border: "1px solid #86efac",
+          },
+        }
+      );
+  
+      // After finding registration, show Button to request visa letter
+      return (
+        <Button
+          onClick={() => {
+            toast.success(
+              <div className="space-y-2">
+                <p className="font-semibold">🌟 Visa Support Request Initiated!</p>
+                <div className="mt-2 text-sm">
+                  <p>Our team will prepare your documents and contact you shortly.</p>
+                  <ul className="list-disc pl-4 mt-1">
+                    <li>Visa support letter</li>
+                    <li>Program enrollment confirmation</li>
+                    <li>Accommodation details (if requested)</li>
+                  </ul>
+                </div>
+              </div>,
+              {
+                duration: 8000,
+                style: {
+                  backgroundColor: "#f0fdf4",
+                  border: "1px solid #86efac",
+                },
+              }
+            );
+          }}
+          className="w-full bg-[#FFE14D] hover:bg-[#FFE14D]/90 text-black mt-4"
+        >
+          Request Visa Letter
+        </Button>
+      );
+  
     } catch (error: any) {
-      toast.error("😓 Oops! Unable to process your request.", {
-        description: error.message,
-      });
+      toast.error(
+        <div className="space-y-1">
+          <p className="font-semibold">😓 Unable to process your request</p>
+          <p className="text-sm">{error.message}</p>
+          <p className="text-sm mt-1">
+            Need help? Contact us at support@digiportacademy.com
+          </p>
+        </div>,
+        {
+          duration: 5000,
+        }
+      );
     } finally {
       setIsSubmitting(false);
     }
