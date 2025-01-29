@@ -34,8 +34,13 @@ export function RegistrationDialog({
   const [selectedSession, setSelectedSession] = useState("");
   const [availableSessions, setAvailableSessions] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [successData, setSuccessData] = useState<{
+    registrationNumber: string;
+    email: string;
+  } | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Generate session dates
   useEffect(() => {
     const generateSessions = () => {
       const sessions = [];
@@ -64,7 +69,6 @@ export function RegistrationDialog({
     setAvailableSessions(generateSessions());
   }, []);
 
-  // Handle registration form submission
   const handleRegistrationSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -103,33 +107,39 @@ export function RegistrationDialog({
 
       const data = await response.json();
 
+      console.log('response', response)
+
       if (response.status === 409) {
-        toast.error("🚫 Registration Failed", {
-          description: data.error,
+        toast.error("Duplicate Registration Detected", {
+          description: `You have already registered for the ${registrationData.session} session using ${registrationData.email}. Each email address can only register once per session.`,
+          duration: 5000,
         });
+        setIsDialogOpen(false);
         return;
       }
 
       if (!response.ok) {
-        throw new Error("Registration failed");
+        throw new Error(data.error || "Registration failed");
       }
 
-      toast.success(
-        <div>
-          <p>🎉 Congratulations! Your registration is complete.</p>
-          <p>🔢 Registration Number: {registrationNumber}</p>
-          <p>📧 Payment instructions have been sent to your email.</p>
-        </div>
-      );
+      setSuccessData({
+        registrationNumber: registrationNumber,
+        email: registrationData.email as string,
+      });
+      setShowSuccessDialog(true);
+      setIsDialogOpen(false);
     } catch (error) {
-      toast.error("😓 Oops! Registration hit a snag. Please try again.");
+      toast.error("Registration Failed", {
+        description:
+          error instanceof Error ? error.message : "Please try again later",
+        duration: 5000,
+      });
       console.error("Registration error:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Handle visa request form submission
   const handleVisaRequestSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -170,114 +180,148 @@ export function RegistrationDialog({
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] DialogContent">
-        <DialogHeader>
-          <DialogTitle>
-            {view === "registration" ? "Registration" : "Visa Letter Request"}
-          </DialogTitle>
-        </DialogHeader>
-        {view === "registration" ? (
-          <form onSubmit={handleRegistrationSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="name">Full Name</Label>
-              <Input
-                id="name"
-                name="name"
-                placeholder="As per official documents"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="email">Email Address</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Business email preferred"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="organization">Current Organization</Label>
-              <Input id="organization" name="organization" required />
-            </div>
-            <div>
-              <Label htmlFor="session">Session Date</Label>
-              <Select
-                name="session"
-                required
-                value={selectedSession}
-                onValueChange={setSelectedSession}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a session" />
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  {availableSessions.map((session) => (
-                    <SelectItem key={session} value={session}>
-                      {session}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label htmlFor="requirements">Special Requirements</Label>
-              <Input
-                id="requirements"
-                name="requirements"
-                placeholder="Dietary, accessibility, etc."
-              />
-            </div>
-            <Button
-              type="submit"
-              className="w-full bg-[#ff4a4a] hover:bg-[#ff4a4a]/90"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : "Submit Registration"}
-            </Button>
-          </form>
-        ) : (
-          <form onSubmit={handleVisaRequestSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="registrationNumber">
-                6-Digit Registration Number
-              </Label>
-              <Input
-                id="registrationNumber"
-                placeholder="Enter your 6-digit number"
-                value={visaRequestNumber}
-                onChange={(e) =>
-                  setVisaRequestNumber(
-                    e.target.value.replace(/\D/g, "").slice(0, 6)
-                  )
-                }
-                maxLength={6}
-                required
-              />
-            </div>
-            {registrationData && (
-              <div className="border p-4 rounded-md">
-                <h4 className="font-bold">Registration Details:</h4>
-                <p>Name: {registrationData.name}</p>
-                <p>Email: {registrationData.email}</p>
-                <p>Session: {registrationData.session}</p>
-                <p>Organization: {registrationData.organization}</p>
-                <p>Payment Status: {registrationData.paymentStatus}</p>
+    <>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
+        <DialogContent className="sm:max-w-[425px] bg-white">
+          <DialogHeader>
+            <DialogTitle>
+              {view === "registration" ? "Registration" : "Visa Letter Request"}
+            </DialogTitle>
+          </DialogHeader>
+          {view === "registration" ? (
+            <form onSubmit={handleRegistrationSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="As per official documents"
+                  required
+                />
               </div>
-            )}
+              <div>
+                <Label htmlFor="email">Email Address</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Business email preferred"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="organization">Current Organization</Label>
+                <Input id="organization" name="organization" required />
+              </div>
+              <div>
+                <Label htmlFor="session">Session Date</Label>
+                <Select
+                  name="session"
+                  required
+                  value={selectedSession}
+                  onValueChange={setSelectedSession}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a session" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    {availableSessions.map((session) => (
+                      <SelectItem key={session} value={session}>
+                        {session}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="requirements">Special Requirements</Label>
+                <Input
+                  id="requirements"
+                  name="requirements"
+                  placeholder="Dietary, accessibility, etc."
+                />
+              </div>
+              <Button
+                type="submit"
+                className="w-full bg-[#ff4a4a] hover:bg-[#ff4a4a]/90"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Submit Registration"}
+              </Button>
+            </form>
+          ) : (
+            <form onSubmit={handleVisaRequestSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="registrationNumber">
+                  6-Digit Registration Number
+                </Label>
+                <Input
+                  id="registrationNumber"
+                  placeholder="Enter your 6-digit number"
+                  value={visaRequestNumber}
+                  onChange={(e) =>
+                    setVisaRequestNumber(
+                      e.target.value.replace(/\D/g, "").slice(0, 6)
+                    )
+                  }
+                  maxLength={6}
+                  required
+                />
+              </div>
+              {registrationData && (
+                <div className="border p-4 rounded-md">
+                  <h4 className="font-bold">Registration Details:</h4>
+                  <p>Name: {registrationData.name}</p>
+                  <p>Email: {registrationData.email}</p>
+                  <p>Session: {registrationData.session}</p>
+                  <p>Organization: {registrationData.organization}</p>
+                  <p>Payment Status: {registrationData.paymentStatus}</p>
+                </div>
+              )}
+              <Button
+                type="submit"
+                className="w-full bg-[#FFE14D] hover:bg-[#FFE14D]/90 text-black"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Searching..." : "Request Visa Letter"}
+              </Button>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-[425px] bg-white">
+          <DialogHeader>
+            <DialogTitle>Registration Successful! 🎉</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p>Thank you for registering for the training session.</p>
+            <div className="bg-green-50 p-4 rounded-md">
+              <p className="font-semibold">Your Registration Number:</p>
+              <p className="text-2xl font-bold text-green-600">
+                {successData?.registrationNumber}
+              </p>
+            </div>
+            <p className="text-sm text-gray-600">
+              Payment instructions have been sent to:{" "}
+              <span className="font-semibold">{successData?.email}</span>
+            </p>
+            <p className="text-sm text-gray-600">
+              Please check your email (including spam folder) for further
+              instructions.
+            </p>
             <Button
-              type="submit"
-              className="w-full bg-[#FFE14D] hover:bg-[#FFE14D]/90 text-black"
-              disabled={isSubmitting}
+              onClick={() => setShowSuccessDialog(false)}
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
             >
-              {isSubmitting ? "Searching..." : "Request Visa Letter"}
+              Close
             </Button>
-          </form>
-        )}
-      </DialogContent>
-    </Dialog>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
