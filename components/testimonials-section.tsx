@@ -10,21 +10,21 @@ const testimonials = [
     role: "Digital Director, TechGrowth Solutions",
     avatar: "/placeholder.svg?height=100&width=100",
     quote:
-      "The DigiPort Academy program was exactly what our company needed. The practical approach and local insights helped us reshape our digital strategy completely. The networking opportunities were invaluable.",
+      "The DigiPort Academy program was exactly what our company needed. The practical approach and global insights helped us reshape our digital strategy completely. The networking opportunities were invaluable.",
   },
   {
     name: "Marcus Schmidt",
     role: "Innovation Manager, Future Systems GmbH",
     avatar: "/placeholder.svg?height=100&width=100",
     quote:
-      "As someone leading digital transformation initiatives, this program offered fresh perspectives and actionable strategies. The Porto experience added a unique cultural dimension to our learning.",
+      "As someone leading digital transformation initiatives, this program offered fresh perspectives and actionable strategies. The Luxembourg experience added a unique European business dimension to our learning.",
   },
   {
     name: "Ana Rodriguez",
     role: "Operations Head, Digital First Corp",
     avatar: "/placeholder.svg?height=100&width=100",
     quote:
-      "The intimate class size and hands-on workshops made this program stand out. The instructors' real-world experience in the Portuguese tech scene was particularly enlightening.",
+      "The intimate class size and hands-on workshops made this program stand out. I attended the Porto session and was impressed by the instructors' real-world experience in the European tech ecosystem.",
   },
 ]
 

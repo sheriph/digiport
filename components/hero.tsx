@@ -126,7 +126,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              DIGITAL TRANSFORMATION MASTERCLASS - PORTUGAL
+              DIGITAL TRANSFORMATION MASTERCLASS
             </motion.h1>
             <motion.p
               className="text-xl md:text-2xl text-center max-w-3xl text-black/80"
@@ -134,7 +134,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8 }}
             >
-              Transform Your Digital Leadership Skills in the Heart of Porto
+              Transform Your Digital Leadership Skills
             </motion.p>
             <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center"

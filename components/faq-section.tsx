@@ -4,12 +4,12 @@ const faqs = [
   {
     question: "What makes DigiPort Academy different from other digital transformation courses?",
     answer:
-      "Our program uniquely combines practical knowledge from local Portuguese entrepreneurs with hands-on implementation strategies. The intimate class size, direct access to founders, and immersion in Porto's tech ecosystem create an unparalleled learning experience.",
+      "Our program uniquely combines practical knowledge from experienced European entrepreneurs with hands-on implementation strategies. The intimate class size, direct access to founders, and immersion in vibrant tech ecosystems in both Porto and Luxembourg create an unparalleled learning experience.",
   },
   {
-    question: "Do I need to speak Portuguese to attend the course?",
+    question: "Do I need to speak Portuguese or French to attend the course?",
     answer:
-      "No, the entire program is conducted in English. However, you'll get to experience Portuguese culture and business environment, which adds value to your learning experience.",
+      "No, the entire program is conducted in English at both our Portugal and Luxembourg locations. However, you'll get to experience the local culture and business environment, which adds value to your learning experience.",
   },
   {
     question: "What is the typical class size?",
@@ -17,9 +17,14 @@ const faqs = [
       "We maintain a small class size of 15-20 participants to ensure personal attention and meaningful interaction. This also facilitates better networking and group discussions.",
   },
   {
-    question: "Can my company sponsor multiple employees across different sessions?",
+    question: "Can my company sponsor multiple employees across different sessions and locations?",
     answer:
-      "Yes, we offer special corporate packages for companies sending multiple employees across different sessions. We also provide customized training schedules for corporate groups of 10 or more.",
+      "Yes, we offer special corporate packages for companies sending multiple employees across different sessions and locations. We also provide customized training schedules for corporate groups of 10 or more.",
+  },
+  {
+    question: "How do I choose between the Porto and Luxembourg locations?",
+    answer:
+      "Both locations offer the same high-quality curriculum and training experience. Your choice may depend on travel convenience, specific networking interests, or preference for a particular business ecosystem. We're happy to discuss the unique benefits of each location for your specific needs.",
   },
   {
     question: "What post-training support do you provide?",

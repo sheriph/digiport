@@ -19,7 +19,7 @@ import { AccommodationOptionsSection } from "@/components/accommodation-options"
 import { KeyBenefitsSection } from "@/components/key-benefits-section"
 import { FeesAndPackageSection } from "@/components/fees-and-package"
 import { VisaTravelSupportSection } from "@/components/visa-travel-support"
-import { WhyPortoSection } from "@/components/why-porto"
+import { WhyChooseLocationsSection } from "@/components/why-porto"
 import { RegistrationProcessSection } from "@/components/registration-process"
 import { RefundPolicySection } from "@/components/refund-policy"
 import { PartnershipsCsrSection } from "@/components/partnerships-csr"
@@ -54,7 +54,7 @@ export default function Home() {
         <VisaTravelSupportSection />
       </section>
       <section id="why-porto">
-        <WhyPortoSection />
+        <WhyChooseLocationsSection />
       </section>
       <section id="key-benefits">
         <KeyBenefitsSection />

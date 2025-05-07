@@ -4,7 +4,7 @@ import { Building, User } from "lucide-react"
 export function KeyBenefitsSection() {
   const organizationBenefits = [
     "Immediate ROI through practical implementation plans",
-    "Access to Portuguese tech network",
+    "Access to European tech networks",
     "Follow-up consultation session",
     "Digital transformation roadmap",
     "Employee retention strategy",
@@ -15,7 +15,7 @@ export function KeyBenefitsSection() {
   const employeeBenefits = [
     "Hands-on practical skills",
     "International networking",
-    "Portuguese tech ecosystem exposure",
+    "European tech ecosystem exposure",
     "Career advancement opportunities",
     "Digital leadership certification",
     "Post-training support",

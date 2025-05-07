@@ -4,15 +4,18 @@ import { Handshake, Users, Leaf } from "lucide-react"
 export function PartnershipsCsrSection() {
   const partnerships = [
     "Porto Municipality",
-    "Local Tech Startups",
-    "Portuguese Digital Alliance",
+    "Luxembourg Chamber of Commerce",
+    "European Digital Alliance",
     "International Business Network",
+    "Tech Startups Ecosystem",
+    "Digital Innovation Hubs",
   ]
 
   const csrInitiatives = [
-    "Scholarship program for local professionals",
+    "Scholarship programs for local professionals in both locations",
     "Green training initiatives",
-    "Community tech workshops",
+    "Community tech workshops in Porto and Luxembourg",
+    "Cross-border digital inclusion projects",
   ]
 
   return (

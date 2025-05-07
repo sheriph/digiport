@@ -52,7 +52,11 @@ export function SpeakersSection() {
               </div>
               <h3 className="text-xl font-bold mb-2 text-[#ff4a4a]">{speaker.name}</h3>
               <p className="text-gray-600 mb-2">{speaker.role}</p>
-              <p className="text-sm mb-2">{speaker.bio}</p>
+              <p className="text-sm mb-2">{
+                speaker.name === "João Silva" 
+                  ? "A serial entrepreneur with multiple successful tech startups under his belt, João brings a wealth of practical knowledge in building and scaling digital businesses. His hands-on approach to innovation has made him a respected figure in the European tech ecosystem."
+                  : speaker.bio
+              }</p>
               <p className="text-sm font-bold">Expertise: {speaker.expertise}</p>
             </motion.div>
           ))}

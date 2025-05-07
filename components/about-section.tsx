@@ -36,10 +36,10 @@ export function AboutSection() {
             About DigiPort Academy
           </motion.h2>
           <motion.p variants={itemVariants} className="text-xl mb-12 text-center max-w-3xl mx-auto">
-            DigiPort Academy is a collective of Portuguese digital professionals and entrepreneurs passionate about
+            DigiPort Academy is a collective of digital professionals and entrepreneurs passionate about
             sharing practical knowledge. Founded by Maria Santos, a digital transformation consultant with 15 years of
             experience, and João Silva, a tech startup founder, our team brings real-world expertise to professionals
-            seeking practical digital skills.
+            seeking practical digital skills across Europe, with established training centers in Portugal and Luxembourg.
           </motion.p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -49,7 +49,7 @@ export function AboutSection() {
                 items: [
                   "Empower professionals with practical digital skills",
                   "Bridge the gap between theory and real-world application",
-                  "Foster innovation in the Portuguese tech ecosystem",
+                  "Foster innovation in European tech ecosystems",
                 ],
               },
               {
@@ -58,7 +58,7 @@ export function AboutSection() {
                   "3-Day Intensive Training",
                   "Hands-on workshops and case studies",
                   "Networking opportunities with industry leaders",
-                  "Located in the heart of Porto",
+                  "Training centers in Porto and Luxembourg City",
                 ],
               },
               {
@@ -67,7 +67,7 @@ export function AboutSection() {
                   "Develop a strategic digital mindset",
                   "Learn data-driven decision-making techniques",
                   "Enhance digital leadership and communication skills",
-                  "Join a community of digital innovators",
+                  "Join an international community of digital innovators",
                 ],
               },
             ].map((section, index) => (

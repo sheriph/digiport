@@ -19,7 +19,7 @@ const scheduleData = [
       { time: "09:00 - 12:30", event: "Business Analytics Fundamentals" },
       { time: "12:30 - 14:00", event: "Lunch Break" },
       { time: "14:00 - 17:30", event: "Performance Metrics Workshop" },
-      { time: "19:00 - 21:00", event: "Porto Tech Community Meetup" },
+      { time: "19:00 - 21:00", event: "Local Tech Community Meetup" },
     ],
   },
   {

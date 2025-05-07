@@ -38,7 +38,7 @@ export function VisaTravelSupportSection() {
                 <Umbrella className="h-16 w-16 text-blue-500" />
                 <Map className="h-16 w-16 text-green-500" />
                 <p className="text-center text-lg font-semibold">
-                  We'll guide you every step of the way to ensure a smooth journey to Porto!
+                  We'll guide you every step of the way to ensure a smooth journey to your chosen location in Porto or Luxembourg!
                 </p>
               </div>
             </div>

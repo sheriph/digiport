@@ -179,7 +179,9 @@ const PrivacyPolicy = () => (
     <p>For privacy-related inquiries:</p>
     <p>Data Protection Officer</p>
     <p>Email: privacy@digiportacademy.com</p>
-    <p>Address: Rua da Inovação 123, 4000-123 Porto, Portugal</p>
+    <p>Addresses:</p>
+    <p>Porto Office: Rua da Inovação 123, 4000-123 Porto, Portugal</p>
+    <p>Luxembourg Office: 28 Rue Münster, 2160 Grund, Luxembourg</p>
   </div>
 )
 
@@ -274,7 +276,8 @@ const TermsOfUse = () => (
     <h3 className="font-bold">9. CONTACT INFORMATION</h3>
     <p>For questions about these Terms:</p>
     <p>Email: legal@digiportacademy.com</p>
-    <p>Address: Rua da Inovação 123, 4000-123 Porto, Portugal</p>
+    <p>Primary Address: Rua da Inovação 123, 4000-123 Porto, Portugal</p>
+    <p>Secondary Address: 28 Rue Münster, 2160 Grund, Luxembourg</p>
   </div>
 )
 
@@ -450,8 +453,9 @@ const BookingPolicy = () => (
     <p>For booking inquiries:</p>
     <p>Bookings Team</p>
     <p>Email: bookings@digiportacademy.com</p>
-    <p>Phone: +351 223 456 789</p>
-    <p>Hours: Monday-Friday, 9:00-18:00 WET</p>
+    <p>Porto: +351 223 456 789</p>
+    <p>Luxembourg: +352 28 99 75 55</p>
+    <p>Hours: Monday-Friday, 9:00-18:00 CET/WET</p>
   </div>
 )
 
@@ -481,11 +485,15 @@ export function SiteFooter() {
           </div>
 
           <div className="space-y-2 mb-12">
-            <div className="text-xl font-medium">Monthly dates available</div>
+            <div className="text-xl font-medium">Monthly dates available in both locations</div>
             <div className="text-xl">
-              Porto Innovation Hub,
+              Porto: Porto Innovation Hub
               <br />
               Rua da Inovação 123, Porto, Portugal
+              <br /><br />
+              Luxembourg: Neumünster Abbey
+              <br />
+              28 Rue Münster, 2160 Grund, Luxembourg
             </div>
           </div>
 
