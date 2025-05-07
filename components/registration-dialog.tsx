@@ -48,7 +48,8 @@ export function RegistrationDialog({
         "March",
         "April",
         "May",
-        "June",
+        { month: "June", dates: "23-25" },
+        { month: "June", dates: "27-29" },
         "July",
         "August",
         "September",
@@ -58,8 +59,10 @@ export function RegistrationDialog({
       ];
       const currentYear = new Date().getFullYear();
 
-      for (const month of months) {
-        const sessionDate = `${month} 27-29, ${currentYear}`;
+      for (const entry of months) {
+        const sessionDate = typeof entry === 'string' 
+          ? `${entry} 27-29, ${currentYear}`
+          : `${entry.month} ${entry.dates}, ${currentYear}`;
         sessions.push(sessionDate);
       }
 
